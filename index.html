@@ -39,9 +39,10 @@ section{padding:clamp(56px,9vw,104px) 0}
 /* header */
 header{position:sticky;top:0;z-index:50;background:rgba(245,248,241,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
-.logo{width:36px;height:36px;border-radius:11px;background:var(--ink);display:grid;place-items:center}
-.logo svg{width:20px;height:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;letter-spacing:-.02em;white-space:nowrap}
+.nav .btn{white-space:nowrap}
+.logo{width:40px;height:40px;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.logo img{width:30px;height:30px;object-fit:contain}
 .nav .btn{padding:10px 18px;min-height:42px;font-size:.92rem}
 
 /* hero */
@@ -56,10 +57,10 @@ header{position:sticky;top:0;z-index:50;background:rgba(245,248,241,.88);backdro
 .hero-stats{display:flex;flex-wrap:wrap;gap:12px 36px;padding:22px 0 clamp(36px,6vw,64px);border-top:1px solid rgba(255,255,255,.12)}
 .hero-stats b{display:block;font-family:"JetBrains Mono",monospace;font-size:clamp(1.3rem,3vw,1.9rem);color:var(--lime)}
 .hero-stats span{font-size:.85rem;color:#9aa391}
-.hero-visual{position:relative;align-self:end;display:flex;justify-content:center}
-.phone{width:min(300px,78vw);aspect-ratio:9/17;border-radius:38px 38px 0 0;border:8px solid #232a1d;border-bottom:0;background:#f5f8f1;overflow:hidden;position:relative;box-shadow:0 -10px 80px rgba(196,255,0,.18)}
-.phone img{width:100%;height:100%;object-fit:cover;object-position:top center;position:relative;z-index:1}
-.float-card{position:absolute;left:-8px;bottom:60px;z-index:3;background:var(--lime);color:var(--ink);padding:14px 18px;border-radius:16px;box-shadow:0 20px 40px -12px rgba(0,0,0,.5);transform:rotate(-3deg)}
+.hero-visual{position:relative;align-self:center;display:flex;justify-content:center;align-items:center;padding-bottom:clamp(28px,5vw,56px)}
+.hero-visual::before{content:"";position:absolute;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(196,255,0,.9),rgba(196,255,0,.25) 70%,transparent);filter:blur(6px);opacity:.55;top:50%;left:50%;transform:translate(-50%,-55%)}
+.mascot{position:relative;z-index:2;width:100%;max-width:520px;height:auto;object-fit:contain;filter:drop-shadow(0 28px 36px rgba(0,0,0,.55))}
+.float-card{position:absolute;left:0;bottom:clamp(40px,7vw,80px);z-index:3;background:var(--lime);color:var(--ink);padding:14px 18px;border-radius:16px;box-shadow:0 20px 40px -12px rgba(0,0,0,.5);transform:rotate(-3deg)}
 .float-card small{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
 .float-card b{font-family:"JetBrains Mono",monospace;font-size:1.5rem}
 
@@ -101,11 +102,12 @@ input[type=range]{width:100%;accent-color:var(--ink);height:6px}
 .card p{color:var(--muted);font-size:.96rem}
 
 /* app gallery */
-.shots{display:flex;gap:18px;overflow-x:auto;padding:8px 20px 24px;scroll-snap-type:x mandatory;margin:36px -20px 0;-webkit-overflow-scrolling:touch}
-.shot{flex:0 0 min(320px,78vw);scroll-snap-align:start}
-.shot .frame{position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 20px 40px -24px rgba(10,13,8,.4)}
-.shot .frame img{width:100%;height:100%;object-fit:cover;object-position:top left;position:relative;z-index:1}
-.shot span{display:block;margin-top:12px;font-weight:700;font-size:.95rem}
+.shots{columns:2;column-gap:22px;margin-top:36px}
+.shot{break-inside:avoid;margin:0 0 22px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:12px 12px 16px;box-shadow:0 20px 40px -28px rgba(10,13,8,.45)}
+.shot .frame{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;line-height:0}
+.shot .frame img{width:100%;height:auto;display:block}
+.shot span{display:block;margin:14px 6px 0;font-weight:700;font-size:.98rem}
+@media(max-width:760px){.shots{columns:1}}
 
 /* table */
 .fares{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
@@ -146,6 +148,8 @@ footer{background:var(--ink);color:#7d8674;font-size:.85rem;text-align:center;pa
   .g4,.g2{grid-template-columns:1fr}
   .hero-cta .btn{width:100%}
   .nav .btn span.long{display:none}
+  .nav .btn{padding:10px 14px;font-size:.88rem}
+  .brand{font-size:1.05rem}
   .float-card{left:0;bottom:40px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
@@ -161,7 +165,7 @@ footer{background:var(--ink);color:#7d8674;font-size:.85rem;text-align:center;pa
 <header>
   <div class="wrap nav">
     <a class="brand" href="#topo" aria-label="Papa-léguas">
-      <span class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#c4ff00"/></svg></span>
+      <span class="logo"><img src="images/logo.png" alt="" width="30" height="30"></span>
       Papa-léguas
     </a>
     <a class="btn btn-wa wa-link" href="#" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Seja franqueado<span class="long"> no WhatsApp</span></span></a>
@@ -190,10 +194,7 @@ footer{background:var(--ink);color:#7d8674;font-size:.85rem;text-align:center;pa
       </div>
       <div class="hero-visual">
         <div class="float-card"><small>Receita estimada</small><b>R$ 10.000/dia</b></div>
-        <div class="phone">
-          <div class="ph">Coloque aqui a tela do app<br>images/app-painel.png</div>
-          <img src="images/app-painel.png" alt="Painel do motorista no app Papa-léguas" onerror="this.remove()">
-        </div>
+        <img class="mascot" src="images/mascote.png" alt="Mascote Papa-léguas correndo" width="1000" height="983">
       </div>
     </div>
   </div>
@@ -277,12 +278,13 @@ footer{background:var(--ink);color:#7d8674;font-size:.85rem;text-align:center;pa
   </div>
   <div class="wrap">
     <div class="shots">
-      <div class="shot"><div class="frame"><div class="ph">images/app-painel.png</div><img src="images/app-painel.png" alt="Painel do motorista" onerror="this.remove()"></div><span>Painel do motorista</span></div>
-      <div class="shot"><div class="frame"><div class="ph">images/app-rotas.png</div><img src="images/app-rotas.png" alt="Gestão de rotas" onerror="this.remove()"></div><span>Gestão de rotas</span></div>
-      <div class="shot"><div class="frame"><div class="ph">images/app-reservas.png</div><img src="images/app-reservas.png" alt="Manifesto de reservas" onerror="this.remove()"></div><span>Manifesto de reservas</span></div>
-      <div class="shot"><div class="frame"><div class="ph">images/app-carteira.png</div><img src="images/app-carteira.png" alt="Carteira digital com PIX" onerror="this.remove()"></div><span>Carteira digital com PIX</span></div>
-      <div class="shot"><div class="frame"><div class="ph">images/app-chat.png</div><img src="images/app-chat.png" alt="Chat com o passageiro" onerror="this.remove()"></div><span>Chat com o passageiro</span></div>
-      <div class="shot"><div class="frame"><div class="ph">images/app-extrato.png</div><img src="images/app-extrato.png" alt="Extrato de movimentações" onerror="this.remove()"></div><span>Extrato de movimentações</span></div>
+      <div class="shot"><div class="frame"><img src="images/app-painel.png" alt="Painel do motorista com mapa das rotas" loading="lazy"></div><span>Painel do motorista</span></div>
+      <div class="shot"><div class="frame"><img src="images/app-login.png" alt="Tela de login do app Papa-léguas" loading="lazy"></div><span>Acesso ao app</span></div>
+      <div class="shot"><div class="frame"><img src="images/app-rotas.png" alt="Gestão de rotas" loading="lazy"></div><span>Gestão de rotas</span></div>
+      <div class="shot"><div class="frame"><img src="images/app-carteira.png" alt="Carteira digital com PIX" loading="lazy"></div><span>Carteira digital com PIX</span></div>
+      <div class="shot"><div class="frame"><img src="images/app-chat.png" alt="Chat com o passageiro" loading="lazy"></div><span>Chat com o passageiro</span></div>
+      <div class="shot"><div class="frame"><img src="images/app-reservas.png" alt="Manifesto de reservas" loading="lazy"></div><span>Manifesto de reservas</span></div>
+      <div class="shot"><div class="frame"><img src="images/app-extrato.png" alt="Extrato de movimentações" loading="lazy"></div><span>Extrato de movimentações</span></div>
     </div>
   </div>
 </section>
@@ -290,13 +292,9 @@ footer{background:var(--ink);color:#7d8674;font-size:.85rem;text-align:center;pa
 <!-- PRAÇAS -->
 <section>
   <div class="wrap">
-    <span class="eyebrow">Exemplo de praça</span>
-    <h2>Passo Fundo e Chapecó</h2>
-    <p class="lead">Duas cidades médias do Sul, do tamanho exato que a franquia foi pensada para atender — com o mesmo tarifário simples usado em qualquer praça.</p>
-    <div class="grid g2" style="margin-top:32px">
-      <div class="card"><h3>Passo Fundo (RS)</h3><p>Polo regional do norte gaúcho, universitário e comercial — fluxo diário entre bairros e o centro.</p></div>
-      <div class="card"><h3>Chapecó (SC)</h3><p>Centro econômico do Oeste catarinense, com deslocamentos intensos entre distritos e a área central.</p></div>
-    </div>
+    <span class="eyebrow">Tarifário</span>
+    <h2>Tarifa simples, em qualquer cidade</h2>
+    <p class="lead">O mesmo tarifário por assento vale em qualquer praça, de cidades médias a capitais — fácil de explicar para o passageiro e de operar para o franqueado.</p>
     <table class="fares">
       <thead><tr><th>Trajeto</th><th>Valor por assento</th></tr></thead>
       <tbody>
