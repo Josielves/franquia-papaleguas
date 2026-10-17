@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Franquia Papa-léguas — Leve mobilidade inteligente para sua cidade</title>
+<meta name="description" content="Seja franqueado Papa-léguas: app de carona por rotas fixas, vans e micro-ônibus, pronto e com marca própria. Simule quanto você pode faturar.">
+<meta name="theme-color" content="#0a0d08">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0d08; --ink-2:#161b12; --lime:#c4ff00; --lime-d:#a8dc00;
+  --paper:#f5f8f1; --white:#fff; --blue:#1a5fc4; --muted:#5d6556; --line:#e2e8da;
+  --radius:22px; --wrap:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Bricolage Grotesque",system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 20px}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+h1,h2,h3{line-height:1.05;letter-spacing:-.02em;font-weight:800}
+h2{font-size:clamp(2rem,4.6vw,3.2rem);margin:10px 0 14px}
+.lead{color:var(--muted);font-size:clamp(1rem,1.6vw,1.15rem);max-width:640px}
+section{padding:clamp(56px,9vw,104px) 0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:700;border:0;cursor:pointer;border-radius:14px;padding:15px 24px;font-size:1rem;transition:transform .15s,box-shadow .15s,background .15s;min-height:50px}
+.btn:hover{transform:translateY(-2px)}
+.btn-wa{background:var(--lime);color:var(--ink);box-shadow:0 10px 30px -10px rgba(196,255,0,.7)}
+.btn-wa:hover{background:var(--lime-d)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(245,248,241,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--ink);display:grid;place-items:center}
+.logo svg{width:20px;height:20px}
+.nav .btn{padding:10px 18px;min-height:42px;font-size:.92rem}
+
+/* hero */
+.hero{background:var(--ink);color:#fff;padding:clamp(48px,8vw,96px) 0 0;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;width:620px;height:620px;right:-160px;top:-180px;background:radial-gradient(closest-side,rgba(196,255,0,.28),transparent);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:end;position:relative}
+.hero .eyebrow{color:var(--lime)}
+.hero h1{font-size:clamp(2.4rem,6.4vw,4.8rem);margin:14px 0 18px}
+.hero h1 em{font-style:normal;color:var(--lime)}
+.hero p.lead{color:#b9c2b0}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 36px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:12px 36px;padding:22px 0 clamp(36px,6vw,64px);border-top:1px solid rgba(255,255,255,.12)}
+.hero-stats b{display:block;font-family:"JetBrains Mono",monospace;font-size:clamp(1.3rem,3vw,1.9rem);color:var(--lime)}
+.hero-stats span{font-size:.85rem;color:#9aa391}
+.hero-visual{position:relative;align-self:end;display:flex;justify-content:center}
+.phone{width:min(300px,78vw);aspect-ratio:9/17;border-radius:38px 38px 0 0;border:8px solid #232a1d;border-bottom:0;background:#f5f8f1;overflow:hidden;position:relative;box-shadow:0 -10px 80px rgba(196,255,0,.18)}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top center;position:relative;z-index:1}
+.float-card{position:absolute;left:-8px;bottom:60px;z-index:3;background:var(--lime);color:var(--ink);padding:14px 18px;border-radius:16px;box-shadow:0 20px 40px -12px rgba(0,0,0,.5);transform:rotate(-3deg)}
+.float-card small{display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.float-card b{font-family:"JetBrains Mono",monospace;font-size:1.5rem}
+
+/* placeholders (aparecem se a imagem não existir) */
+.ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px;font-size:.8rem;color:var(--muted);background:repeating-linear-gradient(45deg,#eef3e8,#eef3e8 10px,#e6edde 10px,#e6edde 20px)}
+
+/* profit */
+.profit{background:linear-gradient(180deg,var(--lime) 0,#d8ff4d 100%);color:var(--ink);position:relative}
+.profit .eyebrow{color:var(--ink);opacity:.7}
+.profit h2{font-size:clamp(2.2rem,5.6vw,4rem)}
+.profit .lead{color:#2a3320}
+.big-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0 28px}
+.big{background:var(--ink);color:#fff;border-radius:var(--radius);padding:28px 26px}
+.big small{color:#9aa391;font-size:.9rem}
+.big b{display:block;font-family:"JetBrains Mono",monospace;color:var(--lime);font-size:clamp(1.9rem,4.4vw,3rem);margin:6px 0;line-height:1.1;word-break:break-word}
+.big.hl{box-shadow:0 0 0 4px var(--ink),0 0 0 8px rgba(10,13,8,.15)}
+.sim{background:#fff;border-radius:var(--radius);padding:clamp(22px,4vw,36px);display:grid;grid-template-columns:1fr 1fr;gap:18px 36px;box-shadow:0 30px 60px -30px rgba(10,13,8,.35)}
+.sim h3{grid-column:1/-1;font-size:1.4rem}
+.ctrl label{display:flex;justify-content:space-between;font-weight:700;font-size:.92rem;margin-bottom:8px}
+.ctrl output{font-family:"JetBrains Mono",monospace;color:var(--blue)}
+input[type=range]{width:100%;accent-color:var(--ink);height:6px}
+.note{margin-top:18px;font-size:.84rem;color:#3a4430}
+
+/* cards */
+.grid{display:grid;gap:18px}
+.g4{grid-template-columns:repeat(4,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.stat b{display:block;font-family:"JetBrains Mono",monospace;font-size:clamp(1.5rem,3vw,2.1rem);color:var(--ink)}
+.stat p{font-size:.92rem;margin:6px 0 10px}
+.stat small{color:var(--muted);font-size:.76rem}
+.dark{background:var(--ink);color:#fff}
+.dark .lead{color:#b9c2b0}
+.dark .card{background:var(--ink-2);border-color:#262d20}
+.dark .eyebrow{color:var(--lime)}
+.dark .stat b{color:var(--lime)}
+.dark .stat small{color:#7d8674}
+.num{width:44px;height:44px;border-radius:13px;background:var(--lime);color:var(--ink);display:grid;place-items:center;font-weight:800;margin-bottom:16px;font-family:"JetBrains Mono",monospace}
+.card h3{font-size:1.3rem;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.96rem}
+
+/* app gallery */
+.shots{display:flex;gap:18px;overflow-x:auto;padding:8px 20px 24px;scroll-snap-type:x mandatory;margin:36px -20px 0;-webkit-overflow-scrolling:touch}
+.shot{flex:0 0 min(320px,78vw);scroll-snap-align:start}
+.shot .frame{position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 20px 40px -24px rgba(10,13,8,.4)}
+.shot .frame img{width:100%;height:100%;object-fit:cover;object-position:top left;position:relative;z-index:1}
+.shot span{display:block;margin-top:12px;font-weight:700;font-size:.95rem}
+
+/* table */
+.fares{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line)}
+.fares td,.fares th{padding:16px 20px;text-align:left}
+.fares th{background:var(--ink);color:#fff;font-size:.85rem}
+.fares td+td,.fares th+th{text-align:right;font-family:"JetBrains Mono",monospace;font-weight:700}
+.fares tr+tr td{border-top:1px solid var(--line)}
+
+/* plans */
+.plan{position:relative;display:flex;flex-direction:column}
+.plan.pop{background:var(--ink);color:#fff;border-color:var(--ink);transform:translateY(-8px)}
+.plan.pop p,.plan.pop li{color:#c9d2bf}
+.tag{position:absolute;top:-13px;left:24px;background:var(--lime);color:var(--ink);font-size:.74rem;font-weight:800;padding:5px 12px;border-radius:99px;text-transform:uppercase;letter-spacing:.06em}
+.plan ul{list-style:none;margin:18px 0 24px;display:grid;gap:10px;flex:1}
+.plan li{padding-left:26px;position:relative;font-size:.95rem;color:var(--muted)}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:800}
+.plan.pop li::before{color:var(--lime)}
+
+/* final CTA */
+.final{background:var(--ink);color:#fff;text-align:center}
+.final h2{max-width:780px;margin-inline:auto}
+.final .lead{margin:0 auto 30px;color:#b9c2b0}
+footer{background:var(--ink);color:#7d8674;font-size:.85rem;text-align:center;padding:26px 20px 90px;border-top:1px solid #1f261a}
+
+/* floating whatsapp */
+.fab{position:fixed;right:18px;bottom:18px;z-index:60;width:62px;height:62px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 30px -6px rgba(37,211,102,.7);animation:pulse 2.4s infinite}
+.fab svg{width:32px;height:32px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero-visual{order:2}
+  .g4{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:1fr}
+  .big-grid{grid-template-columns:1fr} .sim{grid-template-columns:1fr}
+  .plan.pop{transform:none}
+}
+@media(max-width:560px){
+  .g4,.g2{grid-template-columns:1fr}
+  .hero-cta .btn{width:100%}
+  .nav .btn span.long{display:none}
+  .float-card{left:0;bottom:40px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- ÍCONES -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.4.7 4.7 1.9 6.6L3 29l6.8-1.8a13 13 0 0 0 6.2 1.6c7.2 0 13-5.7 13-12.8S23.200 3 16 3Zm0 23.500c-2 0-3.900-.6-5.500-1.600l-.4-.2-4 1 1.100-3.900-.3-.4a10.400 10.400 0 0 1-1.600-5.600C5.300 10 10.100 5.300 16 5.300S26.700 10 26.700 15.800 21.900 26.500 16 26.500Zm5.900-7.800c-.3-.2-1.900-.9-2.200-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100a8.700 8.700 0 0 1-4.300-3.700c-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-1-2.300c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1 1-1 2.500 1.100 2.900 1.200 3.100 2.100 3.300 5.200 4.600c1.900.8 2.700.9 3.600.7.600-.1 1.900-.8 2.200-1.500s.3-1.400.2-1.500-.3-.2-.6-.4Z"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#topo" aria-label="Papa-léguas">
+      <span class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#c4ff00"/></svg></span>
+      Papa-léguas
+    </a>
+    <a class="btn btn-wa wa-link" href="#" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Seja franqueado<span class="long"> no WhatsApp</span></span></a>
+  </div>
+</header>
+
+<main id="topo">
+
+<!-- HERO -->
+<section class="hero" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Franquia de mobilidade · expansão nacional</span>
+        <h1>Seja dono da mobilidade da <em>sua cidade</em>.</h1>
+        <p class="lead">Um app de carona por rotas fixas, vans e micro-ônibus — pronto, testado e com marca própria. Você cuida da operação local; a tecnologia já está pronta.</p>
+        <div class="hero-cta">
+          <a class="btn btn-wa wa-link" href="#" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Desejo ser um franqueado</a>
+          <a class="btn btn-ghost" href="#lucro">Ver quanto posso faturar</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>R$ 300 mil</b><span>receita/mês na simulação</span></div>
+          <div><b>10%</b><span>retido por passageiro</span></div>
+          <div><b>R$ 0</b><span>de desenvolvimento do app</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="float-card"><small>Receita estimada</small><b>R$ 10.000/dia</b></div>
+        <div class="phone">
+          <div class="ph">Coloque aqui a tela do app<br>images/app-painel.png</div>
+          <img src="images/app-painel.png" alt="Painel do motorista no app Papa-léguas" onerror="this.remove()">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LUCRO -->
+<section class="profit" id="lucro">
+  <div class="wrap">
+    <span class="eyebrow">Rentabilidade</span>
+    <h2>Quanto o franqueado pode faturar</h2>
+    <p class="lead">Simulação com 200 motoristas ativos, 10 corridas por dia, 4 passageiros por corrida — e você retendo 10% do valor pago por cada passageiro.</p>
+
+    <div class="big-grid">
+      <div class="big"><small>Receita por dia</small><b id="rDia">R$ 10.000</b><small>sobre <span id="rAss">8.000</span> assentos vendidos/dia</small></div>
+      <div class="big hl"><small>Receita por mês</small><b id="rMes">R$ 300 mil</b><small>o número que muda o jogo</small></div>
+      <div class="big"><small>Receita por ano</small><b id="rAno">R$ 3,65 mi</b><small>com operação recorrente</small></div>
+    </div>
+
+    <div class="sim">
+      <h3>Simule o seu cenário</h3>
+      <div class="ctrl"><label for="s1">Motoristas ativos <output id="o1">200</output></label><input id="s1" type="range" min="10" max="500" step="10" value="200"></div>
+      <div class="ctrl"><label for="s2">Corridas por motorista/dia <output id="o2">10</output></label><input id="s2" type="range" min="1" max="20" step="1" value="10"></div>
+      <div class="ctrl"><label for="s3">Passageiros por corrida <output id="o3">4</output></label><input id="s3" type="range" min="1" max="8" step="1" value="4"></div>
+      <div class="ctrl"><label for="s4">Tarifa média por assento <output id="o4">R$ 12,50</output></label><input id="s4" type="range" min="10" max="15" step="0.5" value="12.5"></div>
+      <div class="ctrl"><label for="s5">Percentual retido pelo franqueado <output id="o5">10%</output></label><input id="s5" type="range" min="5" max="20" step="1" value="10"></div>
+    </div>
+    <p class="note"><strong>Faixa conforme o mix de corridas:</strong> de R$ 8.000/dia (só trajetos a R$ 10) a R$ 12.000/dia (só trajetos a R$ 15). Valores de simulação, não garantia de faturamento. Mês = 30 dias; ano = 365 dias.</p>
+    <div style="margin-top:28px"><a class="btn btn-dark wa-link" href="#" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Quero esse resultado na minha cidade</a></div>
+  </div>
+</section>
+
+<!-- MERCADO -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">O momento do mercado</span>
+    <h2>Mobilidade por app cresce rápido no Brasil</h2>
+    <p class="lead">Números do setor que sustentam a oportunidade de trazer o Papa-léguas para sua cidade.</p>
+    <div class="grid g4" style="margin-top:36px">
+      <div class="card stat"><b>US$ 15 bi</b><p>mercado de mobilidade compartilhada no Brasil (2025)</p><small>Fonte: IMARC Group</small></div>
+      <div class="card stat"><b>+11,5%</b><p>crescimento anual projetado do setor até 2034</p><small>Fonte: IMARC Group</small></div>
+      <div class="card stat"><b>1% → 11%</b><p>salto no uso de apps de transporte no Brasil desde 2017</p><small>Fonte: CNT</small></div>
+      <div class="card stat"><b>US$ 39,9 bi</b><p>projeção do mercado de mobilidade compartilhada até 2034</p><small>Fonte: IMARC Group</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOR -->
+<section class="dark">
+  <div class="wrap">
+    <span class="eyebrow">Exemplo de praça · São Paulo</span>
+    <h2>O tamanho da dor que o Papa-léguas resolve</h2>
+    <p class="lead">São Paulo é só uma amostra: gente perdendo horas todo dia para se deslocar, com poucas alternativas de transporte por rota fixa. O mesmo padrão se repete em capitais e cidades médias do país inteiro.</p>
+    <div class="grid g4" style="margin-top:36px">
+      <div class="card stat"><b>1h44</b><p>tempo médio diário de deslocamento por paulistano</p><small>Fonte: Rede Nossa SP / Fecomercio-SP</small></div>
+      <div class="card stat"><b>23%</b><p>dos moradores gastam 2h+ só na ida para o trabalho</p><small>Fonte: Rede Nossa SP / Fecomercio-SP</small></div>
+      <div class="card stat"><b>2h05</b><p>de deslocamento diário nas zonas sul e norte</p><small>Fonte: pesquisa "Viver em São Paulo"</small></div>
+      <div class="card stat"><b>R$ 11,17 bi</b><p>orçamento da prefeitura para mobilidade urbana em 2026</p><small>Fonte: Câmara Municipal de SP</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Diferenciais</span>
+    <h2>Por que Papa-léguas</h2>
+    <div class="grid g3" style="margin-top:36px">
+      <div class="card"><div class="num">1</div><h3>Tecnologia pronta</h3><p>App completo para passageiro e motorista, com rastreamento ao vivo, reservas, notificações, chat e carteira digital — sem custo de desenvolvimento para o franqueado.</p></div>
+      <div class="card"><div class="num">2</div><h3>Dois modelos numa marca só</h3><p>Carona entre vizinhos por rota fixa e frota própria de vans/micro-ônibus para excursões, eventos e empresas — mais fontes de receita na mesma operação.</p></div>
+      <div class="card"><div class="num">3</div><h3>WhatsApp integrado</h3><p>Confirmação de embarque, contato direto com o passageiro e avisos automáticos pelo WhatsApp, sem fricção para quem usa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<section style="background:#fff;padding-bottom:clamp(40px,6vw,72px)">
+  <div class="wrap">
+    <span class="eyebrow">Produto</span>
+    <h2>O aplicativo, na prática</h2>
+    <p class="lead">Telas reais do app rodando hoje — painel do motorista, carteira digital, reservas e chat, prontos para receber a marca e a região do franqueado.</p>
+  </div>
+  <div class="wrap">
+    <div class="shots">
+      <div class="shot"><div class="frame"><div class="ph">images/app-painel.png</div><img src="images/app-painel.png" alt="Painel do motorista" onerror="this.remove()"></div><span>Painel do motorista</span></div>
+      <div class="shot"><div class="frame"><div class="ph">images/app-rotas.png</div><img src="images/app-rotas.png" alt="Gestão de rotas" onerror="this.remove()"></div><span>Gestão de rotas</span></div>
+      <div class="shot"><div class="frame"><div class="ph">images/app-reservas.png</div><img src="images/app-reservas.png" alt="Manifesto de reservas" onerror="this.remove()"></div><span>Manifesto de reservas</span></div>
+      <div class="shot"><div class="frame"><div class="ph">images/app-carteira.png</div><img src="images/app-carteira.png" alt="Carteira digital com PIX" onerror="this.remove()"></div><span>Carteira digital com PIX</span></div>
+      <div class="shot"><div class="frame"><div class="ph">images/app-chat.png</div><img src="images/app-chat.png" alt="Chat com o passageiro" onerror="this.remove()"></div><span>Chat com o passageiro</span></div>
+      <div class="shot"><div class="frame"><div class="ph">images/app-extrato.png</div><img src="images/app-extrato.png" alt="Extrato de movimentações" onerror="this.remove()"></div><span>Extrato de movimentações</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRAÇAS -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Exemplo de praça</span>
+    <h2>Passo Fundo e Chapecó</h2>
+    <p class="lead">Duas cidades médias do Sul, do tamanho exato que a franquia foi pensada para atender — com o mesmo tarifário simples usado em qualquer praça.</p>
+    <div class="grid g2" style="margin-top:32px">
+      <div class="card"><h3>Passo Fundo (RS)</h3><p>Polo regional do norte gaúcho, universitário e comercial — fluxo diário entre bairros e o centro.</p></div>
+      <div class="card"><h3>Chapecó (SC)</h3><p>Centro econômico do Oeste catarinense, com deslocamentos intensos entre distritos e a área central.</p></div>
+    </div>
+    <table class="fares">
+      <thead><tr><th>Trajeto</th><th>Valor por assento</th></tr></thead>
+      <tbody>
+        <tr><td>Região → Centro ou Centro → Região</td><td>R$ 10,00</td></tr>
+        <tr><td>Região → Região</td><td>R$ 15,00</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="dark">
+  <div class="wrap">
+    <span class="eyebrow">Como funciona</span>
+    <h2>Do interesse à operação rodando</h2>
+    <div class="grid g4" style="margin-top:36px">
+      <div class="card"><div class="num">01</div><h3>Contato inicial</h3><p>Você chama no WhatsApp e conhece o modelo de negócio e a região disponível.</p></div>
+      <div class="card"><div class="num">02</div><h3>Estudo da praça</h3><p>Levantamento de mobilidade e potencial de demanda para a sua cidade.</p></div>
+      <div class="card"><div class="num">03</div><h3>Setup da operação</h3><p>App configurado com a sua região, treinamento e definição das rotas e tarifas.</p></div>
+      <div class="card"><div class="num">04</div><h3>Lançamento</h3><p>Divulgação local, primeiros motoristas e passageiros, com acompanhamento próximo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Investimento</span>
+    <h2>Planos de franquia</h2>
+    <p class="lead">Disponível para qualquer cidade do Brasil — valores de referência, ajustados conforme o porte e o potencial de cada região.</p>
+    <div class="grid g3" style="margin-top:44px">
+      <div class="card plan"><h3>Regional</h3><p>Cidades médias, operação enxuta</p><ul><li>Licença de uso do app</li><li>Marca e identidade visual</li><li>Suporte por chat</li></ul><a class="btn btn-dark wa-link" href="#" target="_blank" rel="noopener">Quero este plano</a></div>
+      <div class="card plan pop"><span class="tag">Mais escolhido</span><h3>Metropolitano</h3><p>Capitais e regiões metropolitanas</p><ul><li>Tudo do plano Regional</li><li>Consultoria de lançamento</li><li>Suporte prioritário</li><li>Painel de gestão completo</li></ul><a class="btn btn-wa wa-link" href="#" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Quero este plano</a></div>
+      <div class="card plan"><h3>Master</h3><p>Exclusividade de estado/região</p><ul><li>Tudo do plano Metropolitano</li><li>Direito de sublicenciar a marca</li><li>Prioridade em novas funções</li></ul><a class="btn btn-dark wa-link" href="#" target="_blank" rel="noopener">Quero este plano</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--lime)">Território disponível</span>
+    <h2>Pronto para levar o Papa-léguas para sua cidade?</h2>
+    <p class="lead">Fale com a gente no WhatsApp e receba a apresentação completa, valores de investimento e disponibilidade de território.</p>
+    <a class="btn btn-wa wa-link" href="#" target="_blank" rel="noopener" style="font-size:1.1rem;padding:18px 30px"><svg><use href="#wa"/></svg>Desejo ser um franqueado</a>
+  </div>
+</section>
+</main>
+
+<footer>Papa-léguas · Franquia · © 2026</footer>
+
+<a class="fab wa-link" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg style="color:#fff"><use href="#wa"/></svg></a>
+
+<script>
+// WhatsApp: +55 45 99907-1032
+var WA = "https://wa.me/5545999071032?text=" + encodeURIComponent("Desejo ser um franqueado");
+document.querySelectorAll(".wa-link").forEach(function(a){ a.href = WA; });
+
+// Simulador de rentabilidade
+var $ = function(id){ return document.getElementById(id); };
+var brl = function(v){ return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0}); };
+function short(v){
+  if (v >= 1e6) return "R$ " + (v/1e6).toLocaleString("pt-BR",{maximumFractionDigits:2}) + " mi";
+  if (v >= 1e5) return "R$ " + Math.round(v/1e3).toLocaleString("pt-BR") + " mil";
+  return brl(v);
+}
+function calc(){
+  var d=+$("s1").value, r=+$("s2").value, p=+$("s3").value, f=+$("s4").value, k=+$("s5").value;
+  $("o1").textContent=d; $("o2").textContent=r; $("o3").textContent=p;
+  $("o4").textContent=f.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+  $("o5").textContent=k+"%";
+  var seats=d*r*p, dia=seats*f*(k/100);
+  $("rAss").textContent=seats.toLocaleString("pt-BR");
+  $("rDia").textContent=brl(dia);
+  $("rMes").textContent=short(dia*30);
+  $("rAno").textContent=short(dia*365);
+}
+["s1","s2","s3","s4","s5"].forEach(function(id){ $(id).addEventListener("input",calc); });
+calc();
+</script>
+</body>
+</html>
