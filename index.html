@@ -215,10 +215,10 @@ footer{background:var(--ink);color:#7d8674;font-size:.85rem;text-align:center;pa
 
     <div class="sim">
       <h3>Simule o seu cenário</h3>
-      <div class="ctrl"><label for="s1">Motoristas ativos <output id="o1">200</output></label><input id="s1" type="range" min="10" max="500" step="10" value="200"></div>
-      <div class="ctrl"><label for="s2">Corridas por motorista/dia <output id="o2">10</output></label><input id="s2" type="range" min="1" max="20" step="1" value="10"></div>
-      <div class="ctrl"><label for="s3">Passageiros por corrida <output id="o3">4</output></label><input id="s3" type="range" min="1" max="8" step="1" value="4"></div>
-      <div class="ctrl"><label for="s4">Tarifa média por assento <output id="o4">R$ 12,50</output></label><input id="s4" type="range" min="10" max="15" step="0.5" value="12.5"></div>
+      <div class="ctrl"><label for="s1">Motoristas ativos <output id="o1">200</output></label><input id="s1" type="range" min="10" max="5000" step="10" value="200"></div>
+      <div class="ctrl"><label for="s2">Corridas por motorista/dia <output id="o2">10</output></label><input id="s2" type="range" min="1" max="40" step="1" value="10"></div>
+      <div class="ctrl"><label for="s3">Passageiros por corrida <output id="o3">4</output></label><input id="s3" type="range" min="1" max="20" step="1" value="4"></div>
+      <div class="ctrl"><label for="s4">Tarifa média por assento <output id="o4">R$ 12,50</output></label><input id="s4" type="range" min="10" max="100" step="0.5" value="12.5"></div>
       <div class="ctrl"><label for="s5">Percentual retido pelo franqueado <output id="o5">10%</output></label><input id="s5" type="range" min="5" max="20" step="1" value="10"></div>
     </div>
     <p class="note"><strong>Faixa conforme o mix de corridas:</strong> de R$ 8.000/dia (só trajetos a R$ 10) a R$ 12.000/dia (só trajetos a R$ 15). Valores de simulação, não garantia de faturamento. Mês = 30 dias; ano = 365 dias.</p>
@@ -357,13 +357,14 @@ document.querySelectorAll(".wa-link").forEach(function(a){ a.href = WA; });
 var $ = function(id){ return document.getElementById(id); };
 var brl = function(v){ return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0}); };
 function short(v){
+  if (v >= 1e9) return "R$ " + (v/1e9).toLocaleString("pt-BR",{maximumFractionDigits:2}) + " bi";
   if (v >= 1e6) return "R$ " + (v/1e6).toLocaleString("pt-BR",{maximumFractionDigits:2}) + " mi";
   if (v >= 1e5) return "R$ " + Math.round(v/1e3).toLocaleString("pt-BR") + " mil";
   return brl(v);
 }
 function calc(){
   var d=+$("s1").value, r=+$("s2").value, p=+$("s3").value, f=+$("s4").value, k=+$("s5").value;
-  $("o1").textContent=d; $("o2").textContent=r; $("o3").textContent=p;
+  $("o1").textContent=d.toLocaleString("pt-BR"); $("o2").textContent=r; $("o3").textContent=p;
   $("o4").textContent=f.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
   $("o5").textContent=k+"%";
   var seats=d*r*p, dia=seats*f*(k/100);
